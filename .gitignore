@@ -2,7 +2,10 @@ core.Microsoft*
 core.mongo*
 core.python*
 env.py
+# ignore compiled python code we don't need in version control
 __pycache__/
 *.py[cod]
 node_modules/
 .github/
+# ignore development db file
+*.sqlite3
