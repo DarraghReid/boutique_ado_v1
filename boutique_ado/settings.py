@@ -37,6 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Used by socialaccount app to create the proper callback
+    # URLs when connecting via social media accounts
+    # Used in conjunction with SITE_ID setting added below
+    'django.contrib.sites',
+    'allauth',
+    # Allauth app which allows for basic user account stuff
+    # like logging in/out, user registration, password reset
+    'allauth.account',
+    # Specifically handles logging in via social media providers
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +69,11 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                # Allows django and allauth to access to access HTTP requests
+                # in templates. REQUIRED BY ALLAUTH
+                # For, example, if we wanted to use request.user in our
+                # templates, we will be able with this context precessor
+                # Allauth templates use request frequently
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -66,6 +81,40 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    # Handles superusers loggin into the admin. Allauth doesn't handle
+    # this, so we defer to the default django code
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    # Users can log in with their email address
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+# Allauth will send confirmation emails to any new account by default,
+# so we need to temporarily log those emails to the console to get the
+# confirmation links
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Tell Allauth to allow authentication using either usernames or emails
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+# Email is required to register for the site
+ACCOUNT_EMAIL_REQUIRED = True
+# Verifing email is mandatory, ensuring users are using real email
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# Email must be entered twice to ensure no typos
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+# Usernames must be at least 4 characters
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+# Specify login URL
+LOGIN_URL = '/accounts/login/'
+# Specify URL to redirect back to after loggin in
+# which is the Home Page of the store
+LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 
