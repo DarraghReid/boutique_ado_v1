@@ -22,4 +22,5 @@ urlpatterns = [
     # allauth urls
     # Gives us all the urls for login/logout, password resets etc
     path('accounts/', include('allauth.urls')),
+    path('', include('home.urls')),
 ]
