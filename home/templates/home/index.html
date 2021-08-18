@@ -2,6 +2,45 @@
 <!-- Load static files -->
 {% load static %}
 
+{% block page_header %}
+    <!-- Basic Boostrap gird -->
+    <!-- Grid container containing single row -->
+    <div class="container header-container">
+        <!-- Row containing empty column -->
+        <div class="row">
+            <div class="col"></div>
+        </div>
+        <!-- End of row -->
+    </div>
+    <!-- End of grid container -->
+{% endblock %}
+
 {% block content %}
-    <h1 class="display-4 text-success">It works!</h1>
+    <!-- Basic Boostrap gird -->
+    <!-- Grid container -->
+    <div class="container h-100">
+        <!-- Row -->
+        <div class="row h-100">
+            <!-- Virtically centered column to left of screen, because home page image featured on right -->
+            <div class="col-7 col-md-6 my-auto">
+                <!-- Heading -->
+                <h1 class="display-3 logo-font text-black">
+                    The New Collections Are Here!
+                </h1>
+                <!-- Div containing button-->
+                <div class="my-5">
+                    <!-- Button heading -->
+                    <h4>
+                        <!-- Button is styled link -->
+                        <a href="" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">
+                            Shop Now
+                        </a>
+                    </h4>
+                </div>
+                <!-- End of div containing button -->
+            </div>
+        </div>
+        <!-- End of row -->
+    </div>
+    <!-- End of grid container -->
 {% endblock %}
