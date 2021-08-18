@@ -37,12 +37,61 @@
     <title>Boutique Ado {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
-      <header class="container-fluid fixed-top"></header>
+      <!-- Grid container -->
+      <header class="container-fluid fixed-top">
+        <!-- Header row containing logo, main search bar, account & shopping bag links -->
+        <div class="row">
+          <!-- Logo column: centered by default, left aligned on larger screens -->
+          <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
+            <!-- Link to homepage -->
+            <a href="{% url 'home' %}" class="nav-link main-logo-link">
+              <h2 class="logo-font text-black my-0">
+                <strong>Boutique</strong> Ado
+              </h2>
+            </a>
+            <!-- End link -->
+          </div>
+          <!-- End logo -->
+          <!-- Search form column -->
+          <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+            <!-- Submitting searches as URL parameters -->
+            <form action="" method="get">
+              <!-- Input group contains text input and submit button -->
+              <div class="input-group w=100">
+                <!-- 'q' for query, will be submited to action URL -->
+                <input type="text" name="q">
+                <!-- button attached to text input using input-group-append -->
+                <div class="input-group-append">
+                  <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                    <span class="icon">
+                      <i class="fas fa-search"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <!-- End input group -->
+            </form>
+          </div>
+          <!-- End search form column -->
+          <!-- Acc & shoppping bag column -->
+          <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+            <!-- Unordered list with two list elements-->
+            <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+              <li class="list-inline-item dropdown"></li>
+              <li class="list-inline-item"></li>
+            </ul>
+          </div>
+          <!-- End Acc & shoppping bag column -->
+        </div>
+        <!-- End of header row -->
+      </header>
+      <!-- End of container -->
 
       {% if messages %}
         <div class="message-container"></div>
       {% endif %}
 
+      <!-- Contains logo, main search bar, shopping bag links -->
       {% block page_header %}
       {% endblock %}
 
