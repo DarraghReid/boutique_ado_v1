@@ -16,8 +16,12 @@
 
     <!--CSS-->
     {% block corecss %}
-        <!-- Bootstrap CSS -->
+        <!-- Bootstrap CSS, google fonts, custom css -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
     {% block extra_css %}
@@ -25,10 +29,11 @@
 
     <!-- JavaScript -->
     {% block corejs %}
-        <!-- jQuery, Popper.js, Bootstrap JS -->
+        <!-- jQuery, Popper.js, Bootstrap JS, fontawesome -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/def5cb55d0.js" crossorigin="anonymous"></script>
     {% endblock %}
 
     {% block extra_js %}
@@ -40,7 +45,7 @@
       <!-- Grid container -->
       <header class="container-fluid fixed-top">
         <!-- Header row containing logo, main search bar, account & shopping bag links -->
-        <div class="row">
+        <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
           <!-- Logo column: centered by default, left aligned on larger screens -->
           <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
             <!-- Link to homepage -->
@@ -59,7 +64,7 @@
               <!-- Input group contains text input and submit button -->
               <div class="input-group w=100">
                 <!-- 'q' for query, will be submited to action URL -->
-                <input type="text" name="q">
+                <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
                 <!-- button attached to text input using input-group-append -->
                 <div class="input-group-append">
                   <button class="form-control btn btn-black border border-black rounded-0" type="submit">
@@ -85,7 +90,7 @@
                       <!-- User icon-->
                       <i class="fas fa-user fa-lg"></i>
                     </div>
-                    <p class="My-0">My Account</p>
+                    <p class="my-0">My Account</p>
                   </div>
                 </a>
                 <!-- End achor menu -->
@@ -111,7 +116,7 @@
               <!-- Shopping bag link -->
               <li class="list-inline-item">
                 <!-- If there is something in the bag, font will be bold and different colour -->
-                <a href="" class="{% if grand_total %}text_info font_weight_bold{% else %}text_black{% endif %}">
+                <a href="" class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %}">
                   <!-- Bag container -->
                   <div class="text-center">
                     <!-- Bag icon -->
@@ -146,6 +151,9 @@
       {% endblock %}
 
       {% block content %}
+      {% endblock %}
+
+      {% block postloadjs %}	
       {% endblock %}
 
   </body>
