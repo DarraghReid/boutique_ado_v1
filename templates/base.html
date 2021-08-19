@@ -75,7 +75,7 @@
           <!-- End search form column -->
           <!-- Account & shoppping bag column -->
           <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-            <!-- Unordered list with two list elements-->
+            <!-- Unordered list with two list elements -->
             <ul class="list-inline list-unstyled text-center text-lg-right my-0">
               <li class="list-inline-item dropdown">
                 <!-- Anchor elementc is parent menu containing fontawesome user icon and "My Account" text p -->
@@ -108,7 +108,27 @@
                 </div>
                 <!-- End dropdown menu -->
               </li>
-              <li class="list-inline-item"></li>
+              <!-- Shopping bag link -->
+              <li class="list-inline-item">
+                <!-- If there is something in the bag, font will be bold and different colour -->
+                <a href="" class="{% if grand_total %}text_info font_weight_bold{% else %}text_black{% endif %}">
+                  <!-- Bag container -->
+                  <div class="text-center">
+                    <!-- Bag icon -->
+                    <div>
+                      <i class="fas fa-shopping-bag fa-lg"></i>
+                    </div>
+                    <p class="my-0">
+                      {% if grand_total %}
+                        ${{ grand_total|floatformat:2 }}
+                      {% else %}
+                        $0.00
+                      {% endif %}
+                    </p>
+                  </div>
+                  <!-- End bag container -->
+                </a>
+              </li>
             </ul>
           </div>
           <!-- End Acc & shoppping bag column -->
