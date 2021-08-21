@@ -1,9 +1,16 @@
 from django.db import models
 
 
-# Caterory model will inherit from models.Model
+# Category model will inherit from models.Model
 # (models in imported above from django.db)
 class Category(models.Model):
+
+    # Meta class to correct spelling in Admin
+    # No need to migrate specifically for this as it does not
+    # change the structure of the model
+    class Meta:
+        verbose_name_plural = "Categories"
+
     # Name is a character field that represents the programatic name,
     # which will make it easier to find in views and other code etc
     name = models.CharField(max_length=254)
