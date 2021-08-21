@@ -25,4 +25,7 @@ urlpatterns = [
     # Gives us all the urls for login/logout, password resets etc
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
+    # Include prodcuts.urls urls in thid project level file
+    # Give them a top level URL of products/
+    path('products/', include('products.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
