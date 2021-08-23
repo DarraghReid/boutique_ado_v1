@@ -34,7 +34,7 @@
         <!-- ROW for .. and products display -->
         <div class="row">
             <div class="product-container col-10 offset-1">
-                <div class="row mb-1 mt-1"></div>
+                <div class="row mb-1 mt-2"></div>
                 <!-- ROW for products -->
                 <div class="row">
                     {% for product in products %}
@@ -44,11 +44,11 @@
                             <div class="card h-100 border-0">
                                 <!-- Image -->
                                 {% if product.image %}
-                                    <a href="">
+                                    <a href="{% url 'product_detail' product.id %}">
                                         <img class="card-img-top img-fluid" src="{{ product.image_url }}" alt="{{ product.name }}">
                                     </a>
                                 {% else %}
-                                    <a href="">
+                                    <a href="{% url 'product_detail' product.id %}">
                                         <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                                     </a>
                                 {% endif %}
