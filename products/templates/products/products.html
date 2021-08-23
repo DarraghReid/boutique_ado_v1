@@ -16,15 +16,91 @@
 {% endblock %}
 
 {% block content %}
+    <!-- White overlay to cover background image -->
+    <div class="overlay"></div>
     <!-- Basic Boostrap gird -->
     <!-- Grid container containing single row -->
-    <div class="container">
-        <!-- Row containing empty column -->
+    <div class="container-fluid">
+        <!-- ROW for Products header -->
         <div class="row">
-            <div class="col">
-                {{ products }}
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">
+                    Products
+                </h2>
+                <hr class="w-50 mb-1">
             </div>
         </div>
+        <!-- End products header ROW -->
+        <!-- ROW for .. and products display -->
+        <div class="row">
+            <div class="product-container col-10 offset-1">
+                <div class="row mb-1 mt-1"></div>
+                <!-- ROW for products -->
+                <div class="row">
+                    {% for product in products %}
+                        <!-- insert each product into a Bootstrap card -->
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                            <!-- Bootstrap card-->
+                            <div class="card h-100 border-0">
+                                <!-- Image -->
+                                {% if product.image %}
+                                    <a href="">
+                                        <img class="card-img-top img-fluid" src="{{ product.image_url }}" alt="{{ product.name }}">
+                                    </a>
+                                {% else %}
+                                    <a href="">
+                                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                    </a>
+                                {% endif %}
+                                <!-- Product name on body of card -->
+                                <div class="card-body pb-0">
+                                    <p class="mb-0">{{ product.name }}</p>
+                                </div>
+                                <!-- Price and rating on footer of card -->
+                                <div class="card-footer bg-white pt-0 border-0 text-left">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="lead mb-0 text-left font-weight-bold">
+                                                ${{ product.price }}
+                                            </p>
+                                            {% if product.rating %}
+                                                <small class="text-muted">{{ product.rating }}/5</small>
+                                            {% else %}
+                                                <small class="text-muted">No rating</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Bootstrap card -->
+                        </div>
+                        <!-- Horizontal rule displayed based on number of products in each ROW -->
+                        {% if forloop.counter|divisibleby:1 %}
+                            <div class="col-12 d-sm-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:4 %}
+                            <div class="col-12 d-none d-xl-block mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- End ROW for products -->
+            </div>
+        </div>
+        <!-- End .. and products display ROW -->
         <!-- End of row -->
     </div>
     <!-- End of grid container -->
