@@ -59,8 +59,9 @@
           <!-- End logo -->
           <!-- Search form column -->
           <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-            <!-- Submitting searches as URL parameters -->
-            <form action="" method="get">
+            <!-- Submitting searches as URL parameters using request.GET -->
+            <!-- This form will be submitted to the all_products view (registered with name 'products' in urls.py ) -->
+            <form action="{% url 'products' %}" method="get">
               <!-- Input group contains text input and submit button -->
               <div class="input-group" style="width: 100%;">
                 <!-- 'q' for query, will be submited to action URL -->
