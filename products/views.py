@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
+from django.db.models.functions import Lower
 from .models import Product, Category
 
 # Create your views here.
@@ -31,15 +32,15 @@ def all_products(request):
             sortkey = request.GET['sort']
             # Set sort from None to sortkey
             sort = sortkey
-            # # check to see if sortkey is equal to 'name'
-            # # It seems the reason we copies sort param into sortkey
-            # # is to preserve the the original field name ("name"),
-            # # while we opperate on lower_name field
-            # if sortkey == "name":
-            #     # Set it to lower_name
-            #     sortkey = 'lower_name'
-            #     # lower_name is temporary field of all prdct names in lwr-case
-            #     products = products.annotate(lower_name=Lower('name'))
+            # check to see if sortkey is equal to 'name'
+            # It seems the reason we copies sort param into sortkey
+            # is to preserve the the original field name ("name"),
+            # while we opperate on lower_name field
+            if sortkey == "name":
+                # Set it to lower_name
+                sortkey = 'lower_name'
+                # lower_name is temporary field of all prdct names in lwr-case
+                products = products.annotate(lower_name=Lower('name'))
 
             # Ensure categories are sorted by names
             if sortkey == 'category':
