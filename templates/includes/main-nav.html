@@ -10,9 +10,9 @@
             </a>
             <!-- List of links drop down when above link is clicked -->
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="" class="dropdown-item">By Price</a>
-                <a href="" class="dropdown-item">By Rating</a>
-                <a href="" class="dropdown-item">By Category</a>
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
+                <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item">By Rating</a>
+                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item">By Category</a>
                 <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
             </div>
         </li>
@@ -27,6 +27,7 @@
             <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
                 <!-- '?' signals we're passing category parameter -->
                 <!-- This syntax ensures we have a comma-separated string in the view -->
+                <!-- 'category' is a get parameter -->
                 <a href="{% url 'products' %}?category=activewear,essentials" class="dropdown-item">Activeware &amp; Essentials</a>
                 <a href="{% url 'products' %}?category=jeans" class="dropdown-item">Jeans</a>
                 <a href="{% url 'products' %}?category=shirts" class="dropdown-item">Shirts</a>
