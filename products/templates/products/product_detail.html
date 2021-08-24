@@ -45,6 +45,15 @@
                     <p class="mb-0">{{ product.name }}</p>
                     <!-- Product price -->
                     <p class="lead mb-0 text-left font-weight-bold">{{ product.price }}</p>
+                    <!-- Product category -->
+                    {% if product.category %}
+                        <p class="small mt-1 mb-o">
+                            <a href="{% url 'products' %}?category={{ product.category.name }}" class="text-muted">
+                                <i class="fas fa-tag mr-1"></i>
+                                {{ product.category.friendly_name }}
+                            </a>
+                        </p>
+                    {% endif %}
                     <!-- Product rating -->
                     {% if product.rating %}
                         <small class="text-muted">

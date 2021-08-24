@@ -41,6 +41,11 @@ def all_products(request):
             #     # lower_name is temporary field of all prdct names in lwr-case
             #     products = products.annotate(lower_name=Lower('name'))
 
+            # Ensure categories are sorted by names
+            if sortkey == 'category':
+                # Drill into related model with double underscore
+                sortkey == 'category__name'
+
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
