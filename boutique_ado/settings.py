@@ -78,14 +78,17 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                # Allows django and allauth to access to access HTTP requests
+                # Allows django and allauth to access HTTP requests
                 # in templates. REQUIRED BY ALLAUTH
                 # For, example, if we wanted to use request.user in our
-                # templates, we will be able with this context precessor
+                # templates, we will be able with this context processor
                 # Allauth templates use request frequently
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Can now access bag contents in any templates across site,
+                # ie don't have to return them diff views in diff apps
+                'bag.contexts.bag_contents',
             ],
         },
     },
@@ -180,6 +183,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+FREE_DELIVERY_THRESHOLD = 50
+STANDARD_DELIVERY_PERCENTAGE = 10
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
