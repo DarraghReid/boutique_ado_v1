@@ -14,8 +14,39 @@
     </div>
     <!-- End of grid container -->
 {% endblock %}
-div
 
 {% block content %}
-    
+    <div class="overlay"></div> 
+    <!-- Similar layout to products page, but uses container, not container-fluid -->
+    <div class="container mb-2">
+        <!-- container contains two rows, each with one col-->
+        <div class="row">
+            <!-- COL for shopping bag heading -->
+            <div class="col">
+                <hr>
+                <h2 class="logo-font mb4">
+                    Shopping Bag
+                </h2>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- COL for table of bag contents-->
+            <div class="col">
+                <!-- Only render table if contents in bag -->
+                {% if bag_items %}
+                    <div class="table-responsive rounded"></div>
+                {% else %}
+                    <p class="lead mb-5">Your bag is empty</p>
+                    <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span class="text-uppercase">Keep shopping</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
