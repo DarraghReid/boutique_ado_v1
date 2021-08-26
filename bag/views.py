@@ -30,15 +30,13 @@ def add_to_bag(request, item_id):
     # Put product & quantity into bag dictionary
     # If item_id already in bag, increment it with quantity
     if item_id in list(bag.keys()):
-        item_id += quantity
+        bag[item_id] += quantity
     # Otherwise, create the key and assign it to quantity
     else:
         bag[item_id] = quantity
 
     # Put bag variable into session dictionary
     request.session['bag'] = bag
-
-    print(request.session['bag'])
 
     # Redirect user back to same url
     return redirect(redirect_url)
