@@ -20,18 +20,40 @@ def bag_contents(request):
     # Iterate through all items in shopping bag
     # Get total cost & product count
     # Add products & data to bag items list
-    for item_id, quantity in bag.items():
-        # Get the item from the Product model using the item_id as Primary Key
-        # Not sure how this works, as the Product model doesn't have item ids
-        product = get_object_or_404(Product, pk=item_id)
-        # Add product's quantity + price to total
-        total += quantity * product.price
-        product_count += quantity
-        bag_items.append({
-            "item_id": item_id,
-            "quantity": quantity,
-            "product": product,
-        })
+    # If item has no sizes, item_data is its quantity
+    # If it does, item_data will be dict of items by size
+    for item_id, item_data in bag.items():
+        # Check if item has sizes by checking if item_data is integer
+        # (If it has an integer, item_data is its quantity, therefore,
+        # it has no sizes, as explained just above)
+        if isinstance(item_data, int):
+            # If it does, get the item from the Product
+            # model using the item_id as Primary Key
+            product = get_object_or_404(Product, pk=item_id)
+            # Add product's quantity + price to total
+            total += item_data * product.price
+            product_count += item_data
+            bag_items.append({
+                "item_id": item_id,
+                "quantity": item_data,
+                "product": product,
+            })
+        else:
+            # If the item has sizes, get the item from the Product
+            # model using the item_id as Primary Key
+            product = get_object_or_404(Product, pk=item_id)
+            # Iterate through every size of the item
+            for size, quantity in item_data['items_by_size'].items():
+                # Incremet total price
+                total += quantity * product.price
+                # Incremet product count
+                product_count += quantity
+                bag_items.append({
+                    "item_id": item_id,
+                    "quantity": item_data,
+                    "product": product,
+                    "size": size,
+                })
 
     # If total is less than FREE_DELIVERY_THRESHOLF in settings.py
     if total < settings.FREE_DELIVERY_THRESHOLD:
